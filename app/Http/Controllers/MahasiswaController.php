@@ -29,17 +29,19 @@ class MahasiswaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-  public function store(Request $request)
+ public function store(Request $request)
 {
     $request->validate([
         'nim' => 'required|unique:mahasiswas,nim',
         'nama' => 'required',
         'kelas' => 'required',
-        'matakuliah' => 'required',
+        'matakuliah' => 'required'
     ]);
 
     Mahasiswa::create($request->all());
-    return redirect()->route('mahasiswa.index');
+
+    return redirect()->route('mahasiswa.index')
+        ->with('success', 'Data mahasiswa berhasil ditambahkan');
 }
 
 
